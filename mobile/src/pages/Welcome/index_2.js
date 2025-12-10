@@ -11,21 +11,24 @@ const slides = [
         id: '1',
         title: 'Anote suas Despesas',
         description: 'Anote diariamente seus gastos para ajudar a administrar seu dinheiro.',
-        image: require('../../assets/illustration_1.png'),
+        illustration: require('../../assets/illustration_1.png'),
+        carousel: require('../../assets/carrossel_1.png'),
     },
 
     {
         id: '2',
         title: 'Gerenciamento de dinheiro simples',
         description: 'Receba notificações ou alertas quando seus gastos ultrapassarem o limite.',
-        image: require('../../assets/illustration_2.png'),
+        illustration: require('../../assets/illustration_2.png'),
+        carousel: require('../../assets/carrossel_2.png'),
     },
 
     {
         id: '3',
         title: 'Fácil de rastrear e analisar',
         description: 'Controlar seus gastos ajuda a garantir que você não gaste mais do que o planejado.',
-        image: require('../../assets/illustration_3.png'),
+        illustration: require('../../assets/illustration_3.png'),
+        carousel: require('../../assets/carrossel_3.png'),
     }
 ]
 
@@ -66,10 +69,12 @@ export default function Welcome_2() {
         renderItem={({ item }) => (
           <View style={{ width, alignItems: "center", paddingHorizontal: 20 }}>
             
-            <Image source={item.image} style={{ width: 280, height: 280, resizeMode: "contain" }} />
-
-            <Text style={styles.title}>{item.title}</Text>
-            <Text style={styles.description}>{item.description}</Text>
+            <Image source={item.illustration} style={{ width: 280, height: 280, resizeMode: "contain" }} />
+            <View style={styles.textContainer}>
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.description}>{item.description}</Text>
+            </View>
+            <Image source={item.carousel} style={{ width: 64, height: 16, resizeMode: "contain", marginTop: 20 }} />
           </View>
         )}
         />
@@ -97,8 +102,14 @@ const styles = StyleSheet.create({
     },
 
     logoContainer: {
-        width: 180,
-        height: 180,
+        marginBottom: 24,
+        marginTop: 96,
+    },
+
+    textContainer: {
+        marginTop: 40,
+        marginBottom: 24,
+        gap: 12,
     },
     
     title: {
@@ -123,6 +134,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
+        marginTop: 77,
+        marginBottom: 87,
     },
 
     buttonText: {

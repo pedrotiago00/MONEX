@@ -1,21 +1,21 @@
-// importando dependências
-import { StatusBar } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
-
-// importando fontes
 import { Inter_400Regular, Inter_600SemiBold, useFonts } from '@expo-google-fonts/inter';
-
-// importando rotas
 import Routes from './src/routes/index.js';
 
-// componente principal
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    Inter_400Regular,
+    Inter_600SemiBold,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <NavigationContainer>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor="#0E33F3" // cor do topo (exemplo do seu Figma)
-      />
+      <StatusBar style="light" />
       <Routes />
     </NavigationContainer>
   );
