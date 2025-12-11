@@ -1,11 +1,14 @@
 import React from "react";
 import { View, StyleSheet, Image } from "react-native";
 import { useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Welcome_1( { navigation } ) {
+export default function Welcome() {
+  const navigation = useNavigation();
+
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.replace("Welcome_2");
+      navigation.replace("Carrossel");
     }, 2000);
 
     return () => clearTimeout(timer);

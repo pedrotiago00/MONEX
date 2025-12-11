@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, StyleSheet, Image, Text, TouchableOpacity, Dimensions, FlatList } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get('window');
 
@@ -32,7 +33,8 @@ const slides = [
     }
 ]
 
-export default function Welcome_2() {
+export default function Carrossel() {
+    const navigation = useNavigation();
     // contador para o FlatList
     const flatListRef = useRef(null);
     const [index, setIndex] = useState(0);
@@ -79,7 +81,7 @@ export default function Welcome_2() {
         )}
         />
 
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
             <LinearGradient
                 colors={['#2FDAFF', '#0E33F3']}
                 start={{ x: 0, y: 0 }}

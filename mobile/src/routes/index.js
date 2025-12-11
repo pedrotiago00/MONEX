@@ -3,8 +3,9 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // importando páginas
-import Welcome_1 from "../pages/Welcome/index_1.js";
-import Welcome_2 from "../pages/Welcome/index_2.js";
+import Welcome from "../pages/Welcome/Welcome.js";
+import Carrossel from "../pages/Welcome/Carrossel.js";
+import Login from "../pages/SingIn/Login.js";
 
 // criando stack de navegação
 const Stack = createNativeStackNavigator();
@@ -15,13 +16,18 @@ export default function Routes() {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             {/* Tela de boas-vindas */}
             <Stack.Screen
-            name="Welcome_1" 
-            component={Welcome_1} />
+            name="Welcome" 
+            component={Welcome} />
             
-            {/* Segunda tela de boas-vindas */}
+            {/* Carrossel da tela de boas-vindas */}
             <Stack.Screen
-            name="Welcome_2" 
-            component={Welcome_2} />
+            name="Carrossel" 
+            component={Carrossel} />
+
+            <Stack.Screen
+            name="Login"
+            component={Login}
+            />
         </Stack.Navigator>
     );
 }
