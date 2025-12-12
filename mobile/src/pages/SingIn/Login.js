@@ -70,6 +70,17 @@ export default function Login() {
 
             <Text style={styles.orText}>Ou</Text>
 
+            <View style={styles.socialLoginButtons}>
+                <TouchableOpacity style={styles.socialButton} onPress={() => ('')}>
+                    <Image style={styles.socialIcon} source={require("../../assets/google.png")}></Image>
+                    <Text style={styles.socialButtonText}>Login com o Google</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.socialButton} onPress={() => ('')}>
+                    <Image style={styles.socialIcon} source={require("../../assets/apple.png")}></Image>
+                    <Text style={styles.socialButtonText}>Login com a Apple</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }
@@ -126,7 +137,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 24,
-        marginBottom: 87,
     },
 
     buttonText: {
@@ -137,9 +147,8 @@ const styles = StyleSheet.create({
 
     forgotPasswordButton: {
         alignItems: 'center',
-        width: 327,
-        height: 40,
-        paddingTop: 24,
+        marginTop: 20,
+        marginBottom: 16,
     },
 
     forgotPasswordText: {
@@ -152,5 +161,38 @@ const styles = StyleSheet.create({
     orText: {
         marginTop: 16,
         fontSize: 14,
+        fontFamily: 'Inter_400Regular',
+        color: '#6B7580',
+    },
+
+    socialLoginButtons: {
+        marginTop: 24,
+        width: 327,
+        gap: 20,
+    },
+
+    socialButton: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        width: 327,
+        height: 56,
+        borderWidth: 1,
+        borderColor: "#CED1D6",
+        borderRadius: 14,
+        backgroundColor: "#FFF",
+        gap: 12,
+    },
+
+    socialIcon: {
+        width: 20,
+        height: 20,
+        resizeMode: "contain",
+    },
+
+    socialButtonText: {
+        color: "#000",
+        fontSize: 14,
+        fontFamily: "Inter_500Medium",
     },
 });
