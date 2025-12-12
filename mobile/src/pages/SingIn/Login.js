@@ -8,20 +8,23 @@ export default function Login() {
 
     return (
         <View style={styles.container}>
+            
             {/* Logo */}
             <Image 
                 source={require("../../assets/logo_login.png")}
+                style={styles.logo}
                 resizeMode="contain"
             />
 
-            {/* Formulário de login */}
-            <View style={styles.formContainer}>
+            {/* Container geral dos inputs */}
+            <View style={styles.inputsWrapper}>
+
+                {/* INPUT 1 */}
                 <View style={styles.inputContainer}>
                     <Image
                         source={require("../../assets/profile.png")}
                         style={styles.icon}
                     />
-
                     <TextInput
                         style={styles.input}
                         placeholder="Nome de usuário"
@@ -31,13 +34,12 @@ export default function Login() {
                     />
                 </View>
 
-
+                {/* INPUT 2 */}
                 <View style={styles.inputContainer}>
                     <Image
                         source={require("../../assets/lock.png")}
                         style={styles.icon}
                     />
-
                     <TextInput
                         style={styles.input}
                         placeholder="Senha"
@@ -48,18 +50,26 @@ export default function Login() {
                     />
                 </View>
 
-                {/* Botão */}
-                <TouchableOpacity style={styles.button} onPress={() => ('')}>
-                    <LinearGradient
-                        colors={['#2FDAFF', '#0E33F3']}
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 1, y: 1 }}
-                        style={styles.button}
-                    >
-                        <Text style={styles.buttonText}>LOGIN</Text>
-                    </LinearGradient>
-                </TouchableOpacity>
             </View>
+
+            {/* Botão */}
+            <TouchableOpacity onPress={() => ('')}>
+                <LinearGradient
+                    colors={['#2FDAFF', '#0E33F3']}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    style={styles.button}
+                >
+                    <Text style={styles.buttonText}>LOGIN</Text>
+                </LinearGradient>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.forgotPasswordButton} onPress={() => ('')}>
+                <Text style={styles.forgotPasswordText}>Esqueci minha senha</Text>
+            </TouchableOpacity>
+
+            <Text style={styles.orText}>Ou</Text>
+
         </View>
     );
 }
@@ -71,7 +81,18 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: "#ffffff",
     },
-    
+
+    logo: {
+        marginTop: 20,
+        marginBottom: 52,
+    },
+
+    /** View geral que segura TODAS as caixas */
+    inputsWrapper: {
+        gap: 20,
+    },
+
+    /** Cada caixa individual */
     inputContainer: {
         flexDirection: "row",
         alignItems: "center",
@@ -82,14 +103,12 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "gray",
         paddingHorizontal: 12,
-        marginTop: 52,
         gap: 8,
     },
 
     icon: {
         width: 20,
         height: 20,
-        marginRight: 10,
         resizeMode: "contain",
     },
 
@@ -114,5 +133,24 @@ const styles = StyleSheet.create({
         color: '#FFF',
         fontSize: 16,
         fontFamily: 'Inter_600SemiBold',
+    },
+
+    forgotPasswordButton: {
+        alignItems: 'center',
+        width: 327,
+        height: 40,
+        paddingTop: 24,
+    },
+
+    forgotPasswordText: {
+        color: '#6B7580',
+        fontSize: 14,
+        fontFamily: 'Inter_Semibold',
+        textAlign: 'center',
+    },
+
+    orText: {
+        marginTop: 16,
+        fontSize: 14,
     },
 });
