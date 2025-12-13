@@ -1,8 +1,10 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
+import { useNavigation } from "@react-navigation/native";
 
 export default function Login() {
+    const navigation = useNavigation();
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
 
@@ -79,6 +81,13 @@ export default function Login() {
                 <TouchableOpacity style={styles.socialButton} onPress={() => ('')}>
                     <Image style={styles.socialIcon} source={require("../../assets/apple.png")}></Image>
                     <Text style={styles.socialButtonText}>Login com a Apple</Text>
+                </TouchableOpacity>
+            </View>
+
+            <View style={styles.registerButton}>
+                <Text style={styles.registerButtonText}>Não tem uma conta?</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
+                    <Text style={styles.registerButtonTextInside}> Cadastre-se aqui.</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -195,4 +204,25 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: "Inter_500Medium",
     },
+
+    registerButton: {
+        marginTop: 20,
+        width: 327,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+
+    registerButtonText: {
+        fontSize: 14,
+        fontFamily: "Inter_400Regular",
+        color: "#242D35",
+        textAlign: "center",
+    },
+
+    registerButtonTextInside: {
+        fontSize: 14,
+        fontFamily: "Inter_600SemiBold",
+        color: "#0E33F3",
+    }
 });

@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Welcome from "../pages/Welcome/Welcome.js";
 import Carrossel from "../pages/Welcome/Carrossel.js";
 import Login from "../pages/SingIn/Login.js";
+import Cadastro from "../pages/SingIn/Cadastro.js";
 
 // criando stack de navegação
 const Stack = createNativeStackNavigator();
@@ -27,6 +28,12 @@ export default function Routes() {
             <Stack.Screen
             name="Login"
             component={Login}
+            />
+
+            {/* Tela de cadastro */}
+            <Stack.Screen
+            name="Cadastro"
+            component={Cadastro}
             />
         </Stack.Navigator>
     );
