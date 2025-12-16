@@ -7,6 +7,8 @@ import Welcome from "../pages/Welcome/Welcome.js";
 import Carrossel from "../pages/Welcome/Carrossel.js";
 import Login from "../pages/SingIn/Login.js";
 import Cadastro from "../pages/SingIn/Cadastro.js";
+import ResetPassword from "../pages/SingIn/ResetPassword.js";
+import ResetPasswordSuccessfully from "../pages/SingIn/ResetPasswordSuccessfully.js";
 
 // criando stack de navegação
 const Stack = createNativeStackNavigator();
@@ -34,6 +36,18 @@ export default function Routes() {
             <Stack.Screen
             name="Cadastro"
             component={Cadastro}
+            />
+
+            {/* Tela para resetar senha */}
+            <Stack.Screen
+            name="ResetPassword"
+            component={ResetPassword}
+            />
+
+            {/* Tela de senha redefinida com sucesso */}
+            <Stack.Screen
+            name="ResetPasswordSuccessfully"
+            component={ResetPasswordSuccessfully}
             />
         </Stack.Navigator>
     );

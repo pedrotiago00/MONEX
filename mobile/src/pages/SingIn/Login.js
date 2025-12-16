@@ -66,7 +66,7 @@ export default function Login() {
                 </LinearGradient>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.forgotPasswordButton} onPress={() => ('')}>
+            <TouchableOpacity style={styles.forgotPasswordButton} onPress={() => navigation.navigate('ResetPassword')}>
                 <Text style={styles.forgotPasswordText}>Esqueci minha senha</Text>
             </TouchableOpacity>
 

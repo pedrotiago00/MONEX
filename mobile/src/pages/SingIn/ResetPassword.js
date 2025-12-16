@@ -42,8 +42,8 @@ export default function ResetPassword() {
             </TouchableOpacity>
 
             <View style={styles.content}>
-                <Text style={styles.title}>Crie seu usuário</Text>
-                <Text style={styles.subtitle}>Crie sua conta para começar a usar o aplicativo.</Text>
+                <Text style={styles.title}>Crie sua nova senha</Text>
+                <Text style={styles.subtitle}>Sua nova senha deve ser diferente da senha anterior.</Text>
             </View>
 
             <View style={styles.inputsWrapper}>
@@ -90,7 +90,7 @@ export default function ResetPassword() {
                     valid={passwordRules.hasNumberOrSymbol} />
             </View>
 
-            <TouchableOpacity onPress={() => ('')}>
+            <TouchableOpacity onPress={() => navigation.navigate('ResetPasswordSuccessfully')}>
                 <LinearGradient
                     colors={['#2FDAFF', '#0E33F3']}
                     start={{ x: 0, y: 0 }}
