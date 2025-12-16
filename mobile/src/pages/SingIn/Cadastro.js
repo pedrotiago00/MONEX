@@ -42,7 +42,7 @@ export default function ResetPassword() {
             </TouchableOpacity>
 
             <View style={styles.content}>
-                <Text style={styles.title}>Crie seu usuário</Text>
+                <Text style={styles.title}>Crie sua conta agora</Text>
                 <Text style={styles.subtitle}>Crie sua conta para começar a usar o aplicativo.</Text>
             </View>
 
