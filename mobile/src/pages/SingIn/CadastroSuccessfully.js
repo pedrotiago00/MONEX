@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
 
-export default function ResetPasswordSuccessfully() {
+export default function CadastroSuccessfully() {
     const navigation = useNavigation();
     return (
         <View style={styles.container}>
@@ -16,8 +16,8 @@ export default function ResetPasswordSuccessfully() {
             </View>
 
             <View style={styles.content}>
-                <Text style={styles.title}>atualização de senha</Text>
-                <Text style={styles.subtitle}>Sua senha foi configurada com sucesso.</Text>
+                <Text style={styles.title}>Cadastro realizado com sucesso!</Text>
+                <Text style={styles.subtitle}>Pronto para usar o MONEX!</Text>
             </View>
 
             <TouchableOpacity onPress={() => navigation.navigate('Login')}>

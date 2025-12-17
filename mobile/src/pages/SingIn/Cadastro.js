@@ -90,14 +90,14 @@ export default function ResetPassword() {
                     valid={passwordRules.hasNumberOrSymbol} />
             </View>
 
-            <TouchableOpacity onPress={() => ('')}>
+            <TouchableOpacity onPress={() => navigation.navigate('CadastroSuccessfully')}>
                 <LinearGradient
                     colors={['#2FDAFF', '#0E33F3']}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}
                     style={styles.button}
                 >
-                    <Text style={styles.buttonText}>Redefinir senha</Text>
+                    <Text style={styles.buttonText}>Cadastrar</Text>
                 </LinearGradient>
             </TouchableOpacity>
 

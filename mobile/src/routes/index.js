@@ -9,6 +9,7 @@ import Login from "../pages/SingIn/Login.js";
 import Cadastro from "../pages/SingIn/Cadastro.js";
 import ResetPassword from "../pages/SingIn/ResetPassword.js";
 import ResetPasswordSuccessfully from "../pages/SingIn/ResetPasswordSuccessfully.js";
+import CadastroSuccessfully from "../pages/SingIn/CadastroSuccessfully.js";
 
 // criando stack de navegação
 const Stack = createNativeStackNavigator();
@@ -48,6 +49,12 @@ export default function Routes() {
             <Stack.Screen
             name="ResetPasswordSuccessfully"
             component={ResetPasswordSuccessfully}
+            />
+
+            {/* Tela de cadastro realizado com sucesso */}
+            <Stack.Screen
+            name="CadastroSuccessfully"
+            component={CadastroSuccessfully}
             />
         </Stack.Navigator>
     );
