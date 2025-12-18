@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, Alert } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
 
@@ -21,6 +21,40 @@ function RuleItem({ text, valid }) {
 
 export default function ResetPassword() {
     const navigation = useNavigation();
+    const API_URL = "http://192.168.1.115:3000";
+
+    const handleRegister = async () => {
+        if (!username || !password){
+            Alert.alert("Erro", "Preencha todos os campos");
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_URL}/api/cadastrar`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    username: username,
+                    senha: password,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                Alert.alert("Erro", data.error || "Erro ao cadastrar")
+                return;
+            }
+
+            Alert.alert("Sucesso", "Usuario cadastrado com sucesso!");
+            navigation.navigate("CadastroSuccessfully");
+        } catch (error) {
+            console.error(error);
+            Alert.alert("Erro", "Não foi possivel conectar ao servidor");
+        }
+    }
 
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -90,7 +124,7 @@ export default function ResetPassword() {
                     valid={passwordRules.hasNumberOrSymbol} />
             </View>
 
-            <TouchableOpacity onPress={() => navigation.navigate('CadastroSuccessfully')}>
+            <TouchableOpacity onPress={handleRegister}>
                 <LinearGradient
                     colors={['#2FDAFF', '#0E33F3']}
                     start={{ x: 0, y: 0 }}
