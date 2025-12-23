@@ -1,4 +1,5 @@
 import pool from '../../database.js'
+const bcrypt = require('bcrypt')
 
 export const inserirUsuarios = async (req, res) => {
     const { username, senha } = req.body;

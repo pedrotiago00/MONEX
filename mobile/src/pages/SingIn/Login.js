@@ -7,6 +7,14 @@ export default function Login() {
     const navigation = useNavigation();
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const API_URL = "http://192.168.1.115:3000";
+
+    const handleSubmit = async () => {
+        const response = await axios.post(`${API_URL}/api/login`, {
+            email,
+            password
+        })
+    };
 
     return (
         <View style={styles.container}>
@@ -22,7 +30,7 @@ export default function Login() {
             <View style={styles.inputsWrapper}>
 
                 {/* INPUT 1 */}
-                <View style={styles.inputContainer}>
+                <View style={styles.inputContainer} onSubmit={handleSubmit}>
                     <Image
                         source={require("../../assets/profile.png")}
                         style={styles.icon}
