@@ -1,18 +1,48 @@
+import express from 'express';
+import jwt from 'jsonwebtoken';
 import pool from '../../database.js'
-const bcrypt = require('bcrypt')
+import bcrypt from 'bcrypt'
 
 export const inserirUsuarios = async (req, res) => {
     const { username, senha } = req.body;
 
-    try{
-        await pool.query(
-            "INSERT INTO usuarios (username, senha) VALUES (?, ?)",
-            [username, senha]
-        );
+    const [existing] = await pool.query(
+        'SELECT * FROM usuarios WHERE username = ?', [username]
+    )
 
-        res.status(201).json({ message: "Usuário criado com sucesso"});
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Erro no banco de dados"})
+    if (existing.length > 0) {
+        return res.status(400).json({ message: 'Usuario já cadastrado' })
     }
-}
+
+    const hashedPassword = await bcrypt.hash(senha, 10);
+
+    await pool.query(
+        "INSERT INTO usuarios (username, senha) VALUES (?, ?)",
+        [username, senha, hashedPassword]
+    );
+    res.json({message: 'Usuario cadastrado com sucesso'});
+};
+
+export const loginUsuarios = async (req, res) => {
+    const { username, senha } = req.body;
+    const [users] = await pool.query(
+        'SELECT * FROM usuarios WHERE username = ?', [username]
+    );
+    const user = users[0] ?? null;
+
+    if (user == null) {
+        res.status(400).json({ message: 'Usuario não encontrado' })
+    };
+
+    const isMatch = await bcrypt.compare(senha, user.senha);
+    if (!isMatch) {
+        return res.status(400).json( { message: 'Usuario não encontrado 2' } );
+    };
+
+    await pool.query(
+        'UPDATE usuarios SET last_login = NOW() WHERE id_usuario', [user.id]
+    );
+
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' })
+    res.json({ token, name: user.name })
+};
