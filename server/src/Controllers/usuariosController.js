@@ -18,7 +18,7 @@ export const inserirUsuarios = async (req, res) => {
 
     await pool.query(
         "INSERT INTO usuarios (username, senha) VALUES (?, ?)",
-        [username, senha, hashedPassword]
+        [username, hashedPassword]
     );
     res.json({message: 'Usuario cadastrado com sucesso'});
 };
@@ -31,18 +31,19 @@ export const loginUsuarios = async (req, res) => {
     const user = users[0] ?? null;
 
     if (user == null) {
-        res.status(400).json({ message: 'Usuario não encontrado' })
+        return res.status(400).json({ message: 'Usuario não encontrado' });
     };
 
     const isMatch = await bcrypt.compare(senha, user.senha);
     if (!isMatch) {
-        return res.status(400).json( { message: 'Usuario não encontrado 2' } );
+        return res.status(400).json( { message: 'Senha incorreta' } );
     };
 
     await pool.query(
-        'UPDATE usuarios SET last_login = NOW() WHERE id_usuario', [user.id]
+        'UPDATE usuarios SET last_login = NOW() WHERE id_usuario = ?',
+        [user.id_usuario]
     );
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' })
-    res.json({ token, name: user.name })
+    const token = jwt.sign({ id: user.id_usuario }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    res.json({ token, username: user.username });
 };
