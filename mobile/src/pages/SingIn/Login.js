@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from "@react-navigation/native";
 
@@ -7,14 +7,35 @@ export default function Login() {
     const navigation = useNavigation();
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
-    const API_URL = "http://192.168.1.115:3000";
+    const [loading, setLoading] = React.useState(false);
+    const API_URL = "http://192.168.1.115:3000"; 
 
     const handleSubmit = async () => {
-        const response = await axios.post(`${API_URL}/api/login`, {
-            email,
-            password
-        })
-    };
+        if (!username || !password) {
+            Alert.alert('Erro', 'Preencha usuário e senha');
+            return;
+        }
+        setLoading(true);
+        try {
+            const response = await fetch(`${API_URL}/api/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, senha: password }),
+            });
+            const data = await response.json();
+            if (response.ok) {
+                Alert.alert('Sucesso', 'Login efetuado com sucesso');
+                navigation.navigate('Overview');
+            } else {
+                const message = data?.message || 'Credenciais inválidas';
+                Alert.alert('Erro', message);
+            }
+        } catch (error) {
+            Alert.alert('Erro', 'Não foi possível conectar ao servidor');
+        } finally {
+            setLoading(false);
+        }
+    }; 
 
     return (
         <View style={styles.container}>
@@ -39,6 +60,7 @@ export default function Login() {
                         style={styles.input}
                         placeholder="Nome de usuário"
                         placeholderTextColor="#999"
+                        autoCapitalize="none"
                         value={username}
                         onChangeText={setUsername}
                     />
@@ -57,20 +79,22 @@ export default function Login() {
                         value={password}
                         onChangeText={setPassword}
                         secureTextEntry={true}
+                        returnKeyType="done"
+                        onSubmitEditing={handleSubmit}
                     />
                 </View>
 
             </View>
 
             {/* Botão */}
-            <TouchableOpacity onPress={() => ('')}>
+            <TouchableOpacity onPress={handleSubmit} disabled={loading}>
                 <LinearGradient
                     colors={['#2FDAFF', '#0E33F3']}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 1 }}
                     style={styles.button}
                 >
-                    <Text style={styles.buttonText}>LOGIN</Text>
+                    {loading ? <ActivityIndicator color="#FFF" /> : <Text style={styles.buttonText}>LOGIN</Text>}
                 </LinearGradient>
             </TouchableOpacity>
 
